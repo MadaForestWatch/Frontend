@@ -1,12 +1,21 @@
-import { Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import RootLayout from './layouts/RootLayout';
+import { MUIProvider } from './lib/mui';
+import { SnackbarProvider } from './lib/notistack';
+import { ReactQueryProvider } from './lib/react-query';
+import routes from './routes';
+
+const router = createBrowserRouter(routes);
 
 function App() {
   return (
-    <RootLayout>
-      <Outlet />
-    </RootLayout>
+    <MUIProvider>
+      <ReactQueryProvider>
+        <SnackbarProvider>
+          <RouterProvider router={router} />
+        </SnackbarProvider>
+      </ReactQueryProvider>
+    </MUIProvider>
   );
 }
 
